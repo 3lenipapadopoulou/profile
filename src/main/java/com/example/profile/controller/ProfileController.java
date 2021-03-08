@@ -2,12 +2,8 @@ package com.example.profile.controller;
 
 import com.example.profile.model.Profile;
 import com.example.profile.service.ProfileService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ProfileController {
@@ -18,12 +14,17 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    @RequestMapping("/")
-    public String index(){ return "Welcome to user profile";}
-
     @PostMapping(value = "/createProfile", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Profile createProfile(@RequestBody Profile newProfile){
-        profileService.newProfile();
-        return newProfile;
+    public Profile createProfile(@RequestBody Profile newProfile) {
+        Profile user = profileService.newProfile(newProfile);
+        return user;
     }
+
+    @GetMapping("/getProfile")
+    public Profile readProfile(int id) {
+        Profile profile = profileService.readProfile(id);
+        return profile;
+    }
+
+
 }

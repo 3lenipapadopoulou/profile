@@ -1,10 +1,17 @@
 package com.example.profile.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 
 import java.time.LocalDate;
 
+@Document(collection = "profiles")
 public class Profile {
+    @Id
+    @JsonProperty
+    private String id;
     @JsonProperty
     private String name;
     @JsonProperty
@@ -13,19 +20,22 @@ public class Profile {
     private int age;
     @JsonProperty
     private int password;
-    @JsonProperty
-    private LocalDate dateOfBirth;
+    //@JsonProperty
+    //private LocalDate dateOfBirth;
 
-    public Profile(){
+    public Profile() {
 
     }
 
-    public Profile(String name, String lastName, int age, int password, LocalDate dateOfBirth) {
+
+    public Profile(String id, String name, String lastName, int age, int password, LocalDate dateOfBirth) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
         this.password = password;
-        this.dateOfBirth = dateOfBirth;
+        //this.dateOfBirth = dateOfBirth;
+        this.id = id;
+
     }
 
     public String getName() {
@@ -60,11 +70,19 @@ public class Profile {
         this.password = password;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+//    public LocalDate getDateOfBirth() {
+//        return dateOfBirth;
+//    }
+//
+//    public void setDateOfBirth(LocalDate dateOfBirth) {
+//        this.dateOfBirth = dateOfBirth;
+//    }
+
+    public String getId() {
+        return id;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setId(String id) {
+        this.id = id;
     }
 }
